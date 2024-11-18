@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  green-farm-aid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/green-farm-aid
+    working_dir: /green-farm-aid
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    entrypoint: yarn
+    env_file:
+      - .env
+    depends_on:
+      - green-farm-aid-db
+  green-farm-aid-db:
+    image: postgres:17.1
+    container_name: green-farm-aid-db
+    volumes:
+      - green-farm-aid-db:/var/lib/postgresql/data
+    ports:
+      - 4005:${POSTGRES_PORT}
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+volumes:
+  green-farm-aid-db:
+    external: true

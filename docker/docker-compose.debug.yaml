@@ -1,0 +1,7 @@
+services:
+  green-farm-aid:
+    ports:
+      - 9229:9229
+    environment:
+      - DEBUG=true
+    command: debug

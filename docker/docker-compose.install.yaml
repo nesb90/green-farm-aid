@@ -1,0 +1,3 @@
+services:
+  green-farm-aid:
+    command: install
