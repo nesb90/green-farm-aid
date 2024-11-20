@@ -1,0 +1,4 @@
+services:
+  green-farm-aid:
+    env_file: .env.test
+    command: test
